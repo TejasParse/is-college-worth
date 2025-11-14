@@ -2,7 +2,13 @@ const margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 800 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
-const svg = d3.select("#hex-bin")
+const hexBinSvg = d3.select("#hex-bin")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+const innovativeSvg = d3.select('#innovativeSvg')
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -14,18 +20,17 @@ d3.csv("data/CostvsEarnings.csv").then( function(data) {
     d.MD_EARN_WNE_P10 = +d.MD_EARN_WNE_P10;
   });
 
-
   const x = d3.scaleLinear()
     .domain(d3.extent(data, d => d.COSTT4_A))
     .range([0, width]);
-  svg.append("g")
+  hexBinSvg.append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x));
 
   const y = d3.scaleLinear()
     .domain(d3.extent(data, d => d.MD_EARN_WNE_P10))
     .range([height, 0]);
-  svg.append("g").call(d3.axisLeft(y));
+  hexBinSvg.append("g").call(d3.axisLeft(y));
 
   const hexbin = d3.hexbin()
     .radius(7)
@@ -39,7 +44,7 @@ d3.csv("data/CostvsEarnings.csv").then( function(data) {
 
   const lineData = x.domain().map(cost => ({
     cost: cost,
-    earnings: 4 * cost
+    earnings: cost * 4
   }));
   
   const bins = hexbin(points.map(d => [d.x, d.y]));
@@ -71,7 +76,7 @@ d3.csv("data/CostvsEarnings.csv").then( function(data) {
     }
 
     Tooltip
-      .html(`Average ROI: ${averageRoi}<br>Percentage of colleges: ${(indices.length / data.length) * 100}%`)
+      .html(`Average ROI: ${averageRoi.toFixed(2)}<br>Percentage of colleges: ${((indices.length / data.length) * 100).toFixed(2)}%`)
       .style("left", (d.x + 70) + "px")
       .style("top", (d.y + 50) + "px");
   }
@@ -80,19 +85,19 @@ d3.csv("data/CostvsEarnings.csv").then( function(data) {
       .style("opacity", 0)
   }
 
-  svg.append("clipPath")
-        .attr("id", "clip")
-      .append("rect")
-        .attr("width", width)
-        .attr("height", height)
+  hexBinSvg.append("clipPath")
+      .attr("id", "clip")
+    .append("rect")
+      .attr("width", width)
+      .attr("height", height)
 
   function unique(arr) {
     var u = {}, a = [];
     for(var i = 0, l = arr.length; i < l; ++i){
-        if(!u.hasOwnProperty(arr[i])) {
-            a.push(arr[i]);
-            u[arr[i]] = 1;
-        }
+      if(!u.hasOwnProperty(arr[i])) {
+        a.push(arr[i]);
+        u[arr[i]] = 1;
+      }
     }
     return a;
   }
@@ -100,7 +105,7 @@ d3.csv("data/CostvsEarnings.csv").then( function(data) {
   var xs = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.x))).sort(function(a,b) { return a - b;});
   var ys = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.y))).sort(function(a,b) { return a - b;});
 
-  svg.append("g")
+  hexBinSvg.append("g")
     .attr("clip-path", "url(#clip)")
     .selectAll("path")
     .data(bins)
@@ -116,15 +121,31 @@ d3.csv("data/CostvsEarnings.csv").then( function(data) {
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave);
 
-  svg.append("path")
-      .datum(lineData)
-      .attr("fill", "none")
-      .attr("stroke", "red")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.cost) })
-        .y(function(d) { return y(d.earnings) })
-      )
-  
-
+  hexBinSvg.append("path")
+    .datum(lineData)
+    .attr("fill", "none")
+    .attr("stroke", "red")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.cost) })
+      .y(function(d) { return y(d.earnings) })
+    )
 })
+
+for (i = 0; i < 100; i++) {
+  innovativeSvg.append("line")
+    .style("stroke", "black")
+    .attr("x1", 0)
+    .attr("x2", function () {
+      if (Math.random() > .7) {
+        return width;
+      } else {
+        return width/(Math.random() * 10);
+      }
+    })
+    .attr("y1", Math.random() * height)
+    .attr("y2", Math.random() * height)
+}
+
+
+
