@@ -1,0 +1,16 @@
+#bhavana-section .bhavana_controls { display: flex; gap: 8px; align-items: center; margin: 8px 0 12px; flex-wrap: wrap; }
+#bhavana-section .bhavana_btn { border: 1px solid #d1d5db; background: #fff; border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+#bhavana-section .bhavana_btn:hover { background: #f3f4f6; }
+#bhavana-section .bhavana_hint { font: 12px system-ui, sans-serif; opacity: .7; }
+
+#bhavana-section .bhavana_chart { position: relative; max-width: 980px; margin: 12px 0; }
+#bhavana-section .bhavana_tt {
+  position: absolute; pointer-events: none; background: #fff; border: 1px solid #e5e7eb;
+  padding: 6px 8px; border-radius: 6px; font: 12px system-ui, sans-serif; box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  opacity: 0;
+}
+
+#bhavana-section .bhavana_panel { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 10px 0; }
+#bhavana-section .bhavana_input { border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 10px; font: 13px system-ui, sans-serif; }
+#bhavana-section .bhavana_label { font: 12px system-ui, sans-serif; opacity: .8; }
+#bhavana-section .bhavana_stat { font: 13px system-ui, sans-serif; background: #f8fafc; border: 1px dashed #d1d5db; padding: 6px 10px; border-radius: 6px; }
