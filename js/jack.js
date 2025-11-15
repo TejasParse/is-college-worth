@@ -8,12 +8,6 @@ const hexBinSvg = d3.select("#hex-bin")
   .append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-const innovativeSvg = d3.select('#innovativeSvg')
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", `translate(${margin.left}, ${margin.top})`);
-
 d3.csv("data/CostvsEarnings.csv").then( function(data) {
   data.forEach(d => {
     d.COSTT4_A = +d.COSTT4_A;
@@ -131,21 +125,5 @@ d3.csv("data/CostvsEarnings.csv").then( function(data) {
       .y(function(d) { return y(d.earnings) })
     )
 })
-
-for (i = 0; i < 100; i++) {
-  innovativeSvg.append("line")
-    .style("stroke", "black")
-    .attr("x1", 0)
-    .attr("x2", function () {
-      if (Math.random() > .7) {
-        return width;
-      } else {
-        return width/(Math.random() * 10);
-      }
-    })
-    .attr("y1", Math.random() * height)
-    .attr("y2", Math.random() * height)
-}
-
 
 

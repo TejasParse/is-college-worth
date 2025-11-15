@@ -5,3 +5,8 @@
     padding: 10px 10px;
     border-radius: 10px;
 }
+
+#mapImg {
+    width: 800px;
+    height: 600px;
+}
