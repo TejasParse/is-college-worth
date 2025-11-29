@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 async function viz1() {
-    d3.csv("avgByBracketEdu.csv", d3.autoType).then(data => {
+    d3.csv("/data/avgByBracketEdu.csv", d3.autoType).then(data => {
         d3.select("#adam_health").selectAll("*").remove();
         const margin = {top: 10, right: 20, bottom: 50, left: 70};
         const width = 800 - margin.left - margin.right;
@@ -142,7 +142,7 @@ async function viz1() {
 }
 
 async function viz2() {
-    d3.csv("boxDataByEdu.csv", d3.autoType).then(data => {
+    d3.csv("/data/boxDataByEdu.csv", d3.autoType).then(data => {
     d3.select("#adam_health").selectAll("*").remove();
     const margin = {top: 10, right: 20, bottom: 50, left: 70};
     const width = 800 - margin.left - margin.right;
