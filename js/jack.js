@@ -145,108 +145,136 @@ function Legend(color, {
   return svg.node();
 }
 
-const margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 800 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
 
-const hexBinSvg = d3.select("#hex-bin")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+function hexBinVisual() {
+  const margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 1400 - margin.left - margin.right,
+    height = 800 - margin.top - margin.bottom;
 
-d3.csv("data/CostvsEarnings.csv").then( function(data) {
-  data.forEach(d => {
-    d.COSTT4_A = +d.COSTT4_A;
-    d.MD_EARN_WNE_P10 = +d.MD_EARN_WNE_P10;
-  });
-
-  const x = d3.scaleLinear()
-    .domain(d3.extent(data, d => d.COSTT4_A))
-    .range([0, width]);
-  hexBinSvg.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x));
-
-  const y = d3.scaleLinear()
-    .domain(d3.extent(data, d => d.MD_EARN_WNE_P10))
-    .range([height, 0]);
-  hexBinSvg.append("g").call(d3.axisLeft(y));
-
-  const hexbin = d3.hexbin()
-    .radius(7)
-    .extent([[0, 0], [width, height]]);
-
-  const points = data.map(d => ({
-    x: x(d.COSTT4_A),
-    y: y(d.MD_EARN_WNE_P10),
-    o: d
-  }))
-
-  const lineData = x.domain().map(cost => ({
-    cost: cost,
-    earnings: cost * 4
-  }));
   
-  const bins = hexbin(points.map(d => [d.x, d.y]));
-  const color = d3.scaleSequential(d3.interpolateOrRd)
-    .domain([0, d3.max(bins, d => d.length)]);
+  d3.select("#viz-container").selectAll("*").remove();
 
-  hexBinSvg.append("clipPath")
-      .attr("id", "clip")
-    .append("rect")
-      .attr("width", width)
-      .attr("height", height)
+  const hexBinSvg = d3.select("#viz-container").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-  function unique(arr) {
-    var u = {}, a = [];
-    for(var i = 0, l = arr.length; i < l; ++i){
-      if(!u.hasOwnProperty(arr[i])) {
-        a.push(arr[i]);
-        u[arr[i]] = 1;
+  d3.csv("data/CostvsEarnings.csv").then( function(data) {
+    data.forEach(d => {
+      d.COSTT4_A = +d.COSTT4_A;
+      d.MD_EARN_WNE_P10 = +d.MD_EARN_WNE_P10;
+    });
+
+    const x = d3.scaleLinear()
+      .domain(d3.extent(data, d => d.COSTT4_A))
+      .range([0, width]);
+    hexBinSvg.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x));
+
+    const y = d3.scaleLinear()
+      .domain(d3.extent(data, d => d.MD_EARN_WNE_P10))
+      .range([height, 0]);
+    hexBinSvg.append("g").call(d3.axisLeft(y));
+
+    const hexbin = d3.hexbin()
+      .radius(7)
+      .extent([[0, 0], [width, height]]);
+
+    const points = data.map(d => ({
+      x: x(d.COSTT4_A),
+      y: y(d.MD_EARN_WNE_P10),
+      o: d
+    }))
+
+    const lineData = x.domain().map(cost => ({
+      cost: cost,
+      earnings: cost * 4
+    }));
+    
+    const bins = hexbin(points.map(d => [d.x, d.y]));
+    const color = d3.scaleSequential(d3.interpolateOrRd)
+      .domain([0, d3.max(bins, d => d.length)]);
+
+    hexBinSvg.append("clipPath")
+        .attr("id", "clip")
+      .append("rect")
+        .attr("width", width)
+        .attr("height", height)
+
+    function unique(arr) {
+      var u = {}, a = [];
+      for(var i = 0, l = arr.length; i < l; ++i){
+        if(!u.hasOwnProperty(arr[i])) {
+          a.push(arr[i]);
+          u[arr[i]] = 1;
+        }
       }
+      return a;
     }
-    return a;
-  }
 
-  var xs = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.x))).sort(function(a,b) { return a - b;});
-  var ys = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.y))).sort(function(a,b) { return a - b;});
+    var xs = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.x))).sort(function(a,b) { return a - b;});
+    var ys = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.y))).sort(function(a,b) { return a - b;});
 
-  hexBinSvg.append("g")
-    .attr("clip-path", "url(#clip)")
-    .selectAll("path")
-    .data(bins)
-    .enter().append("path")
-      .attr("id", d => xs.indexOf(d.x) + "-" + ys.indexOf(d.y))
-      .attr("length", d => d.length)
-      .attr("d", hexbin.hexagon())
-      .attr("transform", function(d) { return `translate(${d.x}, ${d.y})`})
-      .attr("fill", function(d) { return color(d.length); })
-      .attr("stroke", "black")
-      .attr("stroke-width", 0.1);
-      
-  hexBinSvg.append("path")
-    .datum(lineData)
-    .attr("fill", "none")
-    .attr("stroke", "red")
-    .attr("stroke-width", 1.5)
-    .attr("d", d3.line()
-      .x(function(d) { return x(d.cost) })
-      .y(function(d) { return y(d.earnings) })
-    )
-  
-  const legendNode = Legend(color, {
-    title: "Institution Bin Count",
-    marginLeft: 5
-  });
+    hexBinSvg.append("path")
+      .datum(lineData)
+      .attr("fill", "red")
+      .attr("fill-opacity", .3)
+      .attr("stroke", "none")
+      .attr("d", d3.area()
+        .x(function(d) { return x(d.cost) })
+        .y0( height )
+        .y1(function(d) { return y(d.earnings) })
+      )
+     hexBinSvg.append("path")
+      .datum(lineData)
+      .attr("fill", "green")
+      .attr("fill-opacity", .3)
+      .attr("stroke", "none")
+      .attr("d", d3.area()
+        .x(function(d) { return x(d.cost) })
+        .y0( -height )
+        .y1(function(d) { return y(d.earnings) })
+      )
 
-  hexBinSvg.append("foreignObject")
-    .attr("x", 20)     
-    .attr("y", 0)
-    .attr("width", 1000)
-    .attr("height", 80)
-    .node()
-    .appendChild(legendNode);
-})
+
+    hexBinSvg.append("g")
+      .attr("clip-path", "url(#clip)")
+      .selectAll("path")
+      .data(bins)
+      .enter().append("path")
+        .attr("id", d => xs.indexOf(d.x) + "-" + ys.indexOf(d.y))
+        .attr("length", d => d.length)
+        .attr("d", hexbin.hexagon())
+        .attr("transform", function(d) { return `translate(${d.x}, ${d.y})`})
+        .attr("fill", function(d) { return color(d.length); })
+        .attr("stroke", "black")
+        .attr("stroke-width", 0.1);
+        
+    hexBinSvg.append("path")
+      .datum(lineData)
+      .attr("fill", "none")
+      .attr("stroke", "red")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.cost) })
+        .y(function(d) { return y(d.earnings) })
+      )
+    
+    const legendNode = Legend(color, {
+      title: "Institution Bin Count",
+      marginLeft: 5
+    });
+
+    hexBinSvg.append("foreignObject")
+      .attr("x", 20)     
+      .attr("y", 0)
+      .attr("width", 1000)
+      .attr("height", 80)
+      .node()
+      .appendChild(legendNode);
+  })
+}
 
 

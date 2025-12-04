@@ -128,19 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     viz1();
                 }
             },
+
         {
             id: 4,
-            x: 150, y: 400,
-            text: "Tejas's Visualization",
-            type: "vis",
-            onEnter: () => {
-                updateFacts("Story 2: Retirement Income by Education Level");
-                showVizModal();
-                tejasViz();
-            }
-        },
-        {
-            id: 5,
             x: 600, y: 500,
             text: "Akhil's Bubble Visualization",
             type: "vis",
@@ -148,6 +138,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 updateFacts("Story 2: Schools by loans originated")
                 showVizModal();
                 akhilBubble(akhilData);
+            }
+        },
+        {
+            id: 5,
+            x: 150, y: 400,
+            text: "Tejas's Visualization",
+            type: "vis",
+            onEnter: () => {
+                updateFacts(`
+                    The promise of many institutions in the country is that universities are supposed to be a return on investment. You go for four years and take on 
+                    tens to hundreds of thousands of dollars in debt so you can make all of it back with the career you got from the degree you earned. However, is that even
+                    true? Is the promise of making all your money back in this day in age even possible? According to the U.S Department of Education\'s College Scorecard from
+                    the most recent institution level data nearly 90% don\'t make a return on their investment after 10 years! 
+                `);
+                showVizModal();
+                tejasViz();
+            }
+        },
+        {
+            id: 6,
+            x: 200, y: 500,
+            text: "Jack's Visualization",
+            type: "vis",
+            onEnter: () => {
+                updateFacts(`
+                        
+                `);
+                showVizModal();
+                hexBinVisual();
             }
         }
         ]
