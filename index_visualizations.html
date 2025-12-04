@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3 Team Project</title>
+    
+    <!-- D3.js Library -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+
+    <script src="https://unpkg.com/topojson@3"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Team CSS Files -->
+    <link rel="stylesheet" href="css/adam.css">
+    <link rel="stylesheet" href="css/akhil.css">
+    <link rel="stylesheet" href="css/bhavana.css">
+    <link rel="stylesheet" href="css/jack.css">
+    <link rel="stylesheet" href="css/srujana.css">
+</head>
+<body>
+    <header>
+        <h1>D3 Team Visualization Project</h1>
+        <p class="subtitle">A collaborative data visualization project</p>
+    </header>
+
+    <main class="container">
+        <section id="adam-section" class="personal-container">
+            <h2>Adam's Visualization</h2>
+            <div class="adam_controls">
+                <button id="adam_btn_1" class="adam_btn">Health and Education</button>
+                <button id="adam_btn_2" class="adam_btn">Income Distribution by Education</button>
+            </div>
+            <div id="adam_health" class="adam_chart"></div>
+        </section>
+
+        <section id="akhil-section" class="personal-container">
+            <h2>Akhil's Visualization</h2>
+            <div class="viz-page">
+                <section class="viz-card">
+                    <h2>Loan dependencies of top 20 schools by loans originated</h2>
+                    <div id="bubbleChart" class="viz-root"></div>
+                    <p class="caption">Heavy dependence on unsubsidized loans means higher future costs and interest, hence worsening ROI</p>
+                </section>
+
+                <section class="viz-card">
+                    <h2>Average student loans by state</h2>
+                    <div id="stateMap" class="viz-root"></div>
+                    <p class="caption">Some regions leave students deeper in debt, showing structural inequality</p>
+                </section>
+            </div>
+        </section>
+
+        <section id="bhavana-section" class="personal-container">
+            <h2>Bhavana's Visualization</h2>
+            <div class="bhavana_controls">
+                <button id="bhavana_btn_growth" class="bhavana_btn">Show salary growth rollout</button>
+                <button id="bhavana_btn_sim" class="bhavana_btn">Open what-if simulator</button>
+                <span class="bhavana_hint">Data: salaries-by-major.csv</span>
+            </div>
+            <div id="bhavana_growth" class="bhavana_chart"></div>
+            <div id="bhavana_sim" class="bhavana_chart"></div>
+        </section>
+
+        <section id="jack-section" class="jacks-container">
+          <h2>Jack's Visualization</h2>
+          <svg id="hex-bin"></svg>
+          <svg id="innovativeSvg"></svg>
+        </section>
+
+        <section id="srujana-section" class="personal-container">
+            <h2>Srujana's Visualization</h2>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Team Project - Data Visualization</p>
+    </footer>
+
+    <!-- Team Script Files -->
+    <script src="js/adam.js"></script>
+    <script src="js/akhil.js"></script>
+    <script src="js/bhavana.js"></script>
+    <script src="js/jack.js"></script>
+    <script src="js/srujana.js"></script>
+</body>
+</html>
