@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function hideVizModal() {
         if (vizModal) {
             vizModal.style.display = "none";
+            vizModal.innerHTML = "";
         }
     }
 
