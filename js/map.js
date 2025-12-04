@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const vizModal = document.getElementById("viz-modal");
+    const vizContainer = document.getElementById("viz-container");
     const vizCloseBtn = document.getElementById("viz-close-btn");
 
     function showVizModal() {
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function hideVizModal() {
         if (vizModal) {
             vizModal.style.display = "none";
-            vizModal.innerHTML = "";
+            vizContainer.innerHTML = "";
         }
     }
 
@@ -127,12 +128,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     viz1();
                 }
             },
-            {
-                id: 4,
-                x: 150, y: 400,
-                text: "Story 2 – Curve helper",
-                type: "vis"
+        {
+            id: 4,
+            x: 150, y: 400,
+            text: "Tejas's Visualization",
+            type: "vis",
+            onEnter: () => {
+                updateFacts("Story 2: Retirement Income by Education Level");
+                showVizModal();
+                tejasViz();
             }
+        }
         ]
     };
     

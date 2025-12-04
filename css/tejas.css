@@ -1,0 +1,209 @@
+/* Tejas's Visualization Styles */
+
+#tejas-section {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.tejas-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.tejas-btn:hover {
+    background-color: #2980b9;
+}
+
+.tejas-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+#tejas-chart {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+#chart-svg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+}
+
+#tejas-chart svg {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#tejas-chart .grid line {
+    stroke: #ddd;
+}
+
+#tejas-chart .grid path {
+    stroke-width: 0;
+}
+
+#tejas-chart .domain {
+    stroke: #333;
+}
+
+#tejas-chart .tick text {
+    fill: #555;
+    font-size: 11px;
+}
+
+
+/* Tooltip styles */
+#tejas-chart .tooltip rect {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Legend styles */
+#tejas-chart .legend text {
+    font-size: 12px;
+    fill: #333;
+}
+
+/* Percentile Control Styles */
+.percentile-control {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.percentile-control label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+}
+
+.percentile-value {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3498db;
+    min-width: 50px;
+    padding: 5px 10px;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid #3498db;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.slider-label {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Custom slider styling */
+#percentile-slider {
+    -webkit-appearance: none;
+    width: 400px;
+    height: 8px;
+    background: linear-gradient(to right, #e74c3c 0%, #f39c12 25%, #27ae60 50%, #3498db 75%, #9b59b6 100%);
+    outline: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+#percentile-slider:hover {
+    opacity: 1;
+}
+
+/* Slider thumb - Webkit */
+#percentile-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #3498db;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+}
+
+#percentile-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    border-color: #2980b9;
+}
+
+/* Slider thumb - Firefox */
+#percentile-slider::-moz-range-thumb {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #3498db;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+}
+
+#percentile-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    border-color: #2980b9;
+}
+
+/* Quick select buttons */
+.quick-select {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+}
+
+.quick-select span {
+    font-size: 14px;
+    color: #666;
+    margin-right: 10px;
+}
+
+.percentile-btn {
+    background-color: white;
+    border: 2px solid #3498db;
+    color: #3498db;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.percentile-btn:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+.percentile-btn:active {
+    transform: translateY(0);
+}
+
