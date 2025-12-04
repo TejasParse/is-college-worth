@@ -8,6 +8,8 @@
     <!-- D3.js Library -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+
+    <script src="https://unpkg.com/topojson@3"></script>
     
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/main.css">
@@ -37,6 +39,19 @@
 
         <section id="akhil-section" class="personal-container">
             <h2>Akhil's Visualization</h2>
+            <div class="viz-page">
+                <section class="viz-card">
+                    <h2>Loan dependencies of top 20 schools by loans originated</h2>
+                    <div id="bubbleChart" class="viz-root"></div>
+                    <p class="caption">Heavy dependence on unsubsidized loans means higher future costs and interest, hence worsening ROI</p>
+                </section>
+
+                <section class="viz-card">
+                    <h2>Average student loans by state</h2>
+                    <div id="stateMap" class="viz-root"></div>
+                    <p class="caption">Some regions leave students deeper in debt, showing structural inequality</p>
+                </section>
+            </div>
         </section>
 
         <section id="bhavana-section" class="personal-container">
