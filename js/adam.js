@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-async function viz1() {
+function viz1() {
     d3.csv("/data/avgByBracketEdu.csv", d3.autoType).then(data => {
         d3.select("#viz-container").selectAll("*").remove();
         const margin = {top: 10, right: 20, bottom: 50, left: 70};

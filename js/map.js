@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 onEnter: () => {
                     updateFacts("Story 2: Main visualization stop.");
                     showVizModal();
-                    viz2();
+                    viz1();
                 }
             },
             {
