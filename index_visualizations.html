@@ -40,18 +40,21 @@
 
         <section id="akhil-section" class="personal-container">
             <h2>Akhil's Visualization</h2>
-            <div class="viz-page">
-                <section class="viz-card">
-                    <h2>Loan dependencies of top 20 schools by loans originated</h2>
-                    <div id="bubbleChart" class="viz-root"></div>
-                    <p class="caption">Heavy dependence on unsubsidized loans means higher future costs and interest, hence worsening ROI</p>
-                </section>
+            <div id="akhil-section">
+                <div class="akhil_controls">
+                    <button class="akhil_btn" data-view="bubble">School view</button>
+                    <button class="akhil_btn" data-view="map">State view</button>
+                    <span class="akhil_hint">Hover the visuals to explore loan patterns</span>
+                </div>
 
-                <section class="viz-card">
-                    <h2>Average student loans by state</h2>
-                    <div id="stateMap" class="viz-root"></div>
-                    <p class="caption">Some regions leave students deeper in debt, showing structural inequality</p>
-                </section>
+                <div id="bubbleChart" class="akhil_chart"></div>
+                <div id="stateMap" class="akhil_chart"></div>
+
+                <div class="akhil_panel">
+                    <div class="akhil_stat">
+                    Subsidized = red · Unsubsidized grad = darker gold · Unsubsidized undergrad = lighter gold
+                    </div>
+                </div>
             </div>
         </section>
 
