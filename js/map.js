@@ -112,14 +112,14 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 id: 2,
-                x: 500, y: 200,
+                x: 625, y: 200,
                 text: "Story 2 – Fact point",
                 type: "fact",
                 onEnter: () => updateFacts("Story 2: Here's a fun fact stop.")
             },
             {
                 id: 3,
-                x: 800, y: 350,
+                x: 700, y: 350,
                 text: "Adam's Visualization",
                 type: "vis",
                 onEnter: () => {
@@ -137,6 +137,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 updateFacts("Story 2: Retirement Income by Education Level");
                 showVizModal();
                 tejasViz();
+            }
+        },
+        {
+            id: 5,
+            x: 600, y: 500,
+            text: "Akhil's Bubble Visualization",
+            type: "vis",
+            onEnter: () => {
+                updateFacts("Story 2: Schools by loans originated")
+                showVizModal();
+                akhilBubble(akhilData);
             }
         }
         ]

@@ -13,6 +13,8 @@ function cleanNum(v){
   return isNaN(n) ? 0 : n;
 }
 
+let akhilData = null; 
+
 d3.csv("data/StudentLoanDebtBySchool.csv").then(function(rows){
   rows.forEach(r=>{
     r.recipients = +r["Recipients"];
@@ -20,13 +22,31 @@ d3.csv("data/StudentLoanDebtBySchool.csv").then(function(rows){
     r.amount = cleanNum(r["$ of Loans Originated"]);
   });
 
-  drawBubble(rows);
-  drawMap(rows);
-  hookControls();
+  akhilData = rows;
 });
+function akhilBubble() {
+  const container = d3.select("#viz-container");
+  container.selectAll("*").remove();
+  drawBubble(akhilData);
+}
+
+function akhilMap() {
+  const container = d3.select("#viz-container");
+  container.selectAll("*").remove();
+  drawMap(akhilData);
+}
+
+function getVizWrap() {
+  const wrap = d3.select("#viz-container");
+  if (wrap.empty()) return null;
+  wrap.selectAll("*").remove();
+  return wrap;
+}
 
 function drawBubble(data){
-  const wrap = d3.select("#bubbleChart");
+  const wrap = getVizWrap();
+  if (!wrap) return;
+
   const size = wrap.node().getBoundingClientRect();
   const w = size.width || 900;
   const h = size.height || 420;
@@ -120,10 +140,35 @@ function drawBubble(data){
   function move(){
     circles.attr("cx",d=>d.x).attr("cy",d=>d.y);
   }
+const legend = svg.append("g")
+  .attr("class", "bubble-legend")
+  .attr("transform", `translate(${w - 200}, 20)`);  // position (right side)
+
+loanTypes.forEach((type, i) => {
+  const g = legend.append("g")
+    .attr("transform", `translate(0, ${i * 22})`);
+
+  g.append("rect")
+    .attr("width", 14)
+    .attr("height", 14)
+    .attr("fill", colors(type))
+    .attr("stroke", "#333")
+    .attr("stroke-width", 0.5);
+
+  g.append("text")
+    .attr("x", 22)
+    .attr("y", 11)
+    .attr("fill", "#333")
+    .style("font-size", "12px")
+    .style("font-family", "system-ui, sans-serif")
+    .text(type);
+});
 }
 
 function drawMap(data){
-  const wrap = d3.select("#stateMap");
+  const wrap = getVizWrap();
+  if (!wrap) return;
+
   const box = wrap.node().getBoundingClientRect();
   const w = box.width || 900;
   const h = box.height || 420;
@@ -226,23 +271,20 @@ function drawMap(data){
   });
 }
 
-function hookControls(){
+function hookControls(data){
   const section = document.getElementById("akhil-section");
   if(!section) return;
-  const bubble = document.getElementById("bubbleChart");
-  const map = document.getElementById("stateMap");
+
   const buttons = section.querySelectorAll(".akhil_btn");
 
   buttons.forEach(btn=>{
     btn.addEventListener("click",()=>{
       const view = btn.getAttribute("data-view");
       if(view === "bubble"){
-        bubble.style.display = "";
-        map.style.display = "";
+        drawBubble(data || akhilData);
       }
       if(view === "map"){
-        bubble.style.display = "none";
-        map.style.display = "";
+        drawMap(data || akhilData);
       }
     });
   });
