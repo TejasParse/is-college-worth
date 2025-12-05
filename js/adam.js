@@ -141,15 +141,15 @@ function viz1() {
     });
 }
 
-async function viz2() {
+function viz2() {
     d3.csv("/data/boxDataByEdu.csv", d3.autoType).then(data => {
-    d3.select("#adam_health").selectAll("*").remove();
+    d3.select("#viz-container").selectAll("*").remove();
     const margin = {top: 10, right: 20, bottom: 50, left: 70};
-    const width = 800 - margin.left - margin.right;
-    const height = 470 - margin.top - margin.bottom;
+    const width = 1400 - margin.left - margin.right;
+    const height = 800 - margin.top - margin.bottom;
 
 
-    const svg = d3.select("#adam_health").append("svg")
+    const svg = d3.select("#viz-container").append("svg")
                             .attr("width", width + margin.left + margin.right)
                             .attr("height", height + margin.top + margin.bottom)
                             .append("g")

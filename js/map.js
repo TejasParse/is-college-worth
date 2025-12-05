@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 type: "vis",
                 onEnter: () => {
                     updateFacts("Welcome to Stop 1 – great place to start your journey!");
-                    showVizModal();
+                    // showVizModal();
                 }
             },
             {
@@ -88,16 +88,46 @@ document.addEventListener("DOMContentLoaded", function () {
             {
                 id: 6,
                 x: 300, y: 410,
-                text: "Fact stop",
-                type: "fact",
-                onEnter: () => updateFacts("Stop 4 – A relaxing area for students.")
+                text: "Adam's Visualization 2",
+                type: "vis",
+                onEnter: () => {
+                    updateFacts("Story 2: Main visualization stop.");
+                    showVizModal();
+                    viz2();
+                }
             },
             {
                 id: 7,
-                x: 370, y: 50,
-                text: "Church",
+                x: 300, y: 150,
+                text: "Adam's Visualization 1",
                 type: "vis",
-                onEnter: () => updateFacts("You have arrived at the Church stop!")
+                onEnter: () => {
+                    updateFacts("Story 2: Main visualization stop.");
+                    showVizModal();
+                    viz1();
+                }
+            },
+            // Srujana Viz 1
+            {
+                id: 8,
+                x: 260, y: 320,
+                text: "Srujana Viz 1",
+                type: "vis",
+                onEnter: () => {
+                    showVizModal();
+                    srujanaInitViz();   // earnings + unemployment chart
+                }
+            },
+            // Srujana Viz 2
+            {
+                id: 9,
+                x: 100, y: 360,
+                text: "Srujana Viz 2",
+                type: "vis",
+                onEnter: () => {
+                    showVizModal();
+                    srujanaViz2();      // Sankey chart
+                }
             }
         ],
     
@@ -116,17 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: "Story 2 – Fact point",
                 type: "fact",
                 onEnter: () => updateFacts("Story 2: Here's a fun fact stop.")
-            },
-            {
-                id: 3,
-                x: 700, y: 350,
-                text: "Adam's Visualization",
-                type: "vis",
-                onEnter: () => {
-                    updateFacts("Story 2: Main visualization stop.");
-                    showVizModal();
-                    viz1();
-                }
             },
             {
                 id: 4,
@@ -168,28 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     hexBinVisual();
                 }
             },
-            // Srujana Viz 1
-            {
-                id: 7,
-                x: 260, y: 320,
-                text: "Srujana Viz 1",
-                type: "vis",
-                onEnter: () => {
-                    showVizModal();
-                    srujanaInitViz();   // earnings + unemployment chart
-                }
-            },
-            // Srujana Viz 2
-            {
-                id: 8,
-                x: 320, y: 360,
-                text: "Srujana Viz 2",
-                type: "vis",
-                onEnter: () => {
-                    showVizModal();
-                    srujanaViz2();      // Sankey chart
-                }
-            }
+            
         ]
     };
     
