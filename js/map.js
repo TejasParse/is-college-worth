@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---------------- Chat State & Helpers ----------------
     const chatMessages = []; // list of { text, role, timestamp }
+    let endReached = false;
 
     const chatMessagesDiv = document.getElementById("chat-messages");
 
@@ -74,6 +75,124 @@ document.addEventListener("DOMContentLoaded", function () {
         .attr("y", 0)
         .attr("width", TARGET_WIDTH)
         .attr("height", TARGET_HEIGHT);
+
+    const completionLineList = [
+        {
+            points: [[912, 699], [912, 295], [891, 293], [801, 353], [520, 353]],
+            hasCompleted: true
+        },
+        {
+            points: [[906, 1], [903, 78], [752, 78], [752, 353], [520, 353]],
+            hasCompleted: true
+        },
+        {
+            points: [[1, 90], [70, 90], [70, 418], [280, 418], [383, 353], [520, 353]],
+            hasCompleted: true
+        },
+        {
+            points: [[652, 699], [642, 664], [642, 572], [744, 447], [755, 353], [520, 353]],
+            hasCompleted: true
+        },
+        {
+            points: [[384,699], [384, 353], [520, 353]],
+            hasCompleted: true
+        },
+        {
+            points: [[278, 1], [278, 310]],
+            hasCompleted: false
+        },
+        {
+            points: [[998, 302], [910, 209], [912, 295]],
+            hasCompleted: false
+        },
+        {
+            points: [[1, 617], [376, 617]],
+            hasCompleted: false
+        },
+        {
+            points: [[381, 1], [381, 353], [400, 353]],
+            hasCompleted: false
+        },
+        {
+            points: [[999, 467], [888, 467], [841, 479], [733, 475]],
+            hasCompleted: false
+        },
+    ]
+
+    function startPaths() {
+        const line = d3.line()
+            .x(d => d[0])
+            .y(d => d[1])
+            .curve(d3.curveLinear);
+        
+        
+        svg.append("circle")
+            .attr("class", "graduation-circles")
+            .attr("cx", 520)
+            .attr("cy", 333)
+            .attr("r", 15)
+            .attr("fill", "#96694f")
+
+        svg.append("circle")
+            .attr("class", "graduation-circles")
+            .attr("cx", 520)
+            .attr("cy", 353)
+            .attr("r", 5)
+            .attr("fill", "#96694f")
+        
+        svg.append("g")
+            .attr("class", "graduation-icon")
+            .html(`
+                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M22 9L12 4L2 9L12 14L22 9ZM22 9V15M19 10.5V16.5L12 20L5 16.5V10.5" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`)
+            .attr("transform", "translate(510, 323)");
+
+        svg.selectAll(".route-line")
+            .data(completionLineList)
+            .enter()
+            .append("path")
+                .attr("class", "route-line")
+                .attr("d", d => line(d.points))
+                .attr("fill", "none")
+                .attr("stroke", d => d.hasCompleted ? "green" : "red")   
+                .attr("stroke-width", 6)
+                .attr("opacity", 0)
+
+        let scrollProgress = 0;
+
+        svg.selectAll(".route-line").each(function() {
+            const length = this.getTotalLength();
+            d3.select(this)
+                .attr("stroke-dasharray", length)
+                .attr("stroke-dashoffset", length)
+                .attr("opacity", .5);
+        });
+
+        svg.on("wheel", function(event) {
+            if (scrollProgress > 0 && svg.selectAll(".route-line")._groups[0].length!== 0) {
+                endReached = true;
+            }
+
+            event.preventDefault();
+            const delta = event.deltaY;
+            const speed = 0.0002;
+
+            scrollProgress += delta * speed;
+            scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+
+            svg.selectAll(".route-line").each(function() {
+                const length = this.getTotalLength();
+                const offset = length * (1 - scrollProgress);
+                d3.select(this).attr("stroke-dashoffset", offset);
+            });
+
+            if(scrollProgress <= 0) {
+                endReached = false;
+                svg.selectAll(".route-line").remove();
+                svg.select(".graduation-icon").remove();
+                svg.selectAll(".graduation-circles").remove();
+            }
+        });
+    }
 
     // ---------------- Helper: Update Facts Box ----------------
     function updateFacts(text) {
@@ -223,9 +342,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 onEnter: () => {
                     updateFacts(`
                     The promise of many institutions in the country is that universities are supposed to be a return on investment. You go for four years and take on 
-                    tens to hundreds of thousands of dollars in debt so you can make all of it back with the career you got from the degree you earned. However, is that even
+                    tens to hundreds of thousands of dollars of debt so you can make all of it back with the career you got from the degree you earned. However, is that even
                     true? Is the promise of making all your money back in this day in age even possible? According to the U.S Department of Education\'s College Scorecard from
-                    the most recent institution level data nearly 90% don\'t make a return on their investment after 10 years! 
+                    the most recent institution level data nearly 90% of students don\'t make a return on their investment after 10 years! 
                 `);
                     showVizModal();
                     tejasViz();
@@ -238,10 +357,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 type: "vis",
                 onEnter: () => {
                     updateFacts(`
-                        
-                `);
+                        Not only is getting your degree almost a guarantee not to be a return on investment but there\'s also the possibility that you don\'t complete it. 
+                        On average five out of ten students complete their degree in at least six years. There is a 50/50 chance that you will waste thousands of dollars 
+                        just to not achieve anything at all. 
+                    `);
+                    addChatMessage("Keep scrolling to see your peers give college a try")
                     showVizModal();
                     hexBinVisual();
+                    startPaths();
                 }
             },
 
@@ -420,7 +543,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Position character at the start and trigger first marker once on load
     if (markers.length > 0) {
         progress = 0;              // make it explicit
-        updateCharacterPosition(); // 🔹 moves green dot to first marker
+        updateCharacterPosition();
 
         if (markers[0].onEnter) {
             markers[0].onEnter(markers[0]);
@@ -433,15 +556,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---------------- Scroll Interaction ----------------
     container.on("wheel", function (event) {
-        event.preventDefault();
+        if (!endReached){
+            event.preventDefault();
 
-        const delta = event.deltaY;
-        const speed = 0.00009;
+            const delta = event.deltaY;
+            const speed = 0.00009;
 
-        progress += delta * speed;
-        progress = Math.max(0, Math.min(1, progress));
+            progress += delta * speed;
+            progress = Math.max(0, Math.min(1, progress));
 
-        updateCharacterPosition();
+            updateCharacterPosition();
+        }
+        
     });
 
     // Close button hides the modal

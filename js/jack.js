@@ -1,3 +1,26 @@
+/*
+MIT License
+
+Copyright (c) 2017 Vasco Asturiano
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
 function Legend(color, {
   title,
   tickSize = 6,
@@ -147,9 +170,9 @@ function Legend(color, {
 
 
 function hexBinVisual() {
-  const margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 1400 - margin.left - margin.right,
-    height = 800 - margin.top - margin.bottom;
+  const margin = {top: 10, right: 30, bottom: 60, left: 80},
+    width = 1380 - margin.left - margin.right,
+    height = 790 - margin.top - margin.bottom;
 
   
   d3.select("#viz-container").selectAll("*").remove();
@@ -166,114 +189,146 @@ function hexBinVisual() {
       d.MD_EARN_WNE_P10 = +d.MD_EARN_WNE_P10;
     });
 
-    const x = d3.scaleLinear()
-      .domain(d3.extent(data, d => d.COSTT4_A))
-      .range([0, width]);
-    hexBinSvg.append("g")
-      .attr("transform", `translate(0, ${height})`)
-      .call(d3.axisBottom(x));
+  const x = d3.scaleLinear()
+    .domain(d3.extent(data, d => d.COSTT4_A))
+    .range([0, width]);
+  hexBinSvg.append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x));
 
-    const y = d3.scaleLinear()
-      .domain(d3.extent(data, d => d.MD_EARN_WNE_P10))
-      .range([height, 0]);
-    hexBinSvg.append("g").call(d3.axisLeft(y));
+  const y = d3.scaleLinear()
+    .domain(d3.extent(data, d => d.MD_EARN_WNE_P10))
+    .range([height, 0]);
+  hexBinSvg.append("g").call(d3.axisLeft(y));
 
-    const hexbin = d3.hexbin()
-      .radius(7)
-      .extent([[0, 0], [width, height]]);
+  const hexbin = d3.hexbin()
+    .radius(7)
+    .extent([[0, 0], [width, height]]);
 
-    const points = data.map(d => ({
-      x: x(d.COSTT4_A),
-      y: y(d.MD_EARN_WNE_P10),
-      o: d
-    }))
+  const points = data.map(d => ({
+    x: x(d.COSTT4_A),
+    y: y(d.MD_EARN_WNE_P10),
+    o: d
+  }))
 
-    const lineData = x.domain().map(cost => ({
-      cost: cost,
-      earnings: cost * 4
-    }));
+  const lineData = x.domain().map(cost => ({
+    cost: cost,
+    earnings: cost * 4
+  }));
     
-    const bins = hexbin(points.map(d => [d.x, d.y]));
-    const color = d3.scaleSequential(d3.interpolateOrRd)
-      .domain([0, d3.max(bins, d => d.length)]);
+  const bins = hexbin(points.map(d => [d.x, d.y]));
+  const color = d3.scaleSequential(d3.interpolateOrRd)
+    .domain([0, d3.max(bins, d => d.length)]);
 
-    hexBinSvg.append("clipPath")
-        .attr("id", "clip")
-      .append("rect")
-        .attr("width", width)
-        .attr("height", height)
+  hexBinSvg.append("clipPath")
+      .attr("id", "clip")
+    .append("rect")
+      .attr("width", width)
+      .attr("height", height)
 
-    function unique(arr) {
-      var u = {}, a = [];
-      for(var i = 0, l = arr.length; i < l; ++i){
-        if(!u.hasOwnProperty(arr[i])) {
-          a.push(arr[i]);
-          u[arr[i]] = 1;
-        }
+  function unique(arr) {
+    var u = {}, a = [];
+    for(var i = 0, l = arr.length; i < l; ++i){
+      if(!u.hasOwnProperty(arr[i])) {
+        a.push(arr[i]);
+        u[arr[i]] = 1;
       }
-      return a;
     }
+    return a;
+  }
 
-    var xs = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.x))).sort(function(a,b) { return a - b;});
-    var ys = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.y))).sort(function(a,b) { return a - b;});
+  var xs = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.x))).sort(function(a,b) { return a - b;});
+  var ys = unique(hexbin(points.map(d => [d.x, d.y])).map(h => parseFloat(h.y))).sort(function(a,b) { return a - b;});
 
+  hexBinSvg.append("path")
+    .datum(lineData)
+    .attr("fill", "red")
+    .attr("fill-opacity", .3)
+    .attr("stroke", "none")
+    .attr("d", d3.area()
+      .x(function(d) { return x(d.cost) })
+      .y0( height )
+      .y1(function(d) { return y(d.earnings) })
+    )
     hexBinSvg.append("path")
-      .datum(lineData)
-      .attr("fill", "red")
-      .attr("fill-opacity", .3)
-      .attr("stroke", "none")
-      .attr("d", d3.area()
-        .x(function(d) { return x(d.cost) })
-        .y0( height )
-        .y1(function(d) { return y(d.earnings) })
-      )
-     hexBinSvg.append("path")
-      .datum(lineData)
-      .attr("fill", "green")
-      .attr("fill-opacity", .3)
-      .attr("stroke", "none")
-      .attr("d", d3.area()
-        .x(function(d) { return x(d.cost) })
-        .y0( -height )
-        .y1(function(d) { return y(d.earnings) })
-      )
+    .datum(lineData)
+    .attr("fill", "green")
+    .attr("fill-opacity", .3)
+    .attr("stroke", "none")
+    .attr("d", d3.area()
+      .x(function(d) { return x(d.cost) })
+      .y0( -height )
+      .y1(function(d) { return y(d.earnings) })
+    )
 
+  hexBinSvg.append("text")
+    .attr("x", 700) 
+    .attr("y", 160)
+    .text("Negative ROI")
+    .attr("font-size", 48)
+    .attr("font-weight", "bold")
+    .attr("fill", "rgba(120, 0, 0, 0.25)") 
+    .attr("text-anchor", "start");
 
-    hexBinSvg.append("g")
-      .attr("clip-path", "url(#clip)")
-      .selectAll("path")
-      .data(bins)
-      .enter().append("path")
-        .attr("id", d => xs.indexOf(d.x) + "-" + ys.indexOf(d.y))
-        .attr("length", d => d.length)
-        .attr("d", hexbin.hexagon())
-        .attr("transform", function(d) { return `translate(${d.x}, ${d.y})`})
-        .attr("fill", function(d) { return color(d.length); })
-        .attr("stroke", "black")
-        .attr("stroke-width", 0.1);
-        
-    hexBinSvg.append("path")
-      .datum(lineData)
-      .attr("fill", "none")
-      .attr("stroke", "red")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.cost) })
-        .y(function(d) { return y(d.earnings) })
-      )
-    
-    const legendNode = Legend(color, {
-      title: "Institution Bin Count",
-      marginLeft: 5
-    });
+  hexBinSvg.append("g")
+    .attr("clip-path", "url(#clip)")
+    .selectAll("path")
+    .data(bins)
+    .enter().append("path")
+      .attr("id", d => xs.indexOf(d.x) + "-" + ys.indexOf(d.y))
+      .attr("length", d => d.length)
+      .attr("d", hexbin.hexagon())
+      .attr("transform", function(d) { return `translate(${d.x}, ${d.y})`})
+      .attr("fill", function(d) { return color(d.length); })
+      .attr("stroke", "black")
+      .attr("stroke-width", 0.1);
+      
+  hexBinSvg.append("path")
+    .datum(lineData)
+    .attr("fill", "none")
+    .attr("stroke", "red")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.cost) })
+      .y(function(d) { return y(d.earnings) })
+    )
+  
+  const legendNode = Legend(color, {
+    title: "Institution Bin Count",
+    marginLeft: 5
+  });
 
-    hexBinSvg.append("foreignObject")
-      .attr("x", 20)     
-      .attr("y", 0)
-      .attr("width", 1000)
-      .attr("height", 80)
-      .node()
-      .appendChild(legendNode);
+  hexBinSvg.append("foreignObject")
+    .attr("x", 20)     
+    .attr("y", 0)
+    .attr("width", 1000)
+    .attr("height", 80)
+    .node()
+    .appendChild(legendNode);
+
+  hexBinSvg.append("text")
+    .attr("class", "axis-label")
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -height / 2)
+    .attr("y", -margin.left + 20)
+    .text("Average Accumulated Income 10 Years after Graduation ($)");
+  
+  hexBinSvg.append("text")
+    .attr("class", "axis-label")
+    .attr("text-anchor", "middle")
+    .attr("x", width/2)
+    .attr("y", height + margin.bottom - 20)
+    .text("Average Annual Cost ($)")
+
+  hexBinSvg.append("text")
+    .attr("x", 60) 
+    .attr("y", 160)
+    .text("Positive ROI")
+    .attr("font-size", 48)
+    .attr("font-weight", "bold")
+    .attr("fill", "rgba(0, 120, 0, 0.25)") 
+    .attr("text-anchor", "start");
   })
 }
 
