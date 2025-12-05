@@ -114,3 +114,33 @@ body {
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+#title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* centers the title */
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Position button on left edge */
+#main-menu-btn {
+    position: absolute;
+    left: 20px; /* adjust spacing from edge */
+    padding: 10px 18px;
+    background: #FFC627; /* ASU gold */
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    transition: 0.2s ease-in-out;
+}
+
+#main-menu-btn:hover {
+    background: #ffdb6d;
+    transform: scale(1.05);
+}
+
