@@ -172,16 +172,29 @@ document.addEventListener("DOMContentLoaded", function () {
         ]
     };
 
-    {
+  // after Jack's marker (id 6)
+{
     id: 7,
-    x: 260, y: 320,       
-    text: "Srujana's Education Viz",
+    x: 260, y: 320,
+    text: "Srujana Viz 1",
     type: "vis",
     onEnter: () => {
-        showVizModal();   
-        srujanaInitViz();  
+        showVizModal();
+        srujanaInitViz();   // earnings + unemployment chart
+    }
+},
+{
+    id: 8,
+    x: 320, y: 360,
+    text: "Srujana Viz 2",
+    type: "vis",
+    onEnter: () => {
+        showVizModal();
+        srujanaViz2();      // Sankey chart
     }
 }
+
+
 
 
     // ---------------- Markers ----------------
