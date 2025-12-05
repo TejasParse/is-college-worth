@@ -207,3 +207,14 @@
     transform: translateY(0);
 }
 
+.tejas-pull-string .string-core {
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+}
+
+.tejas-pull-string .age-node:hover {
+    r: 8;
+}
+
+.tejas-pull-string .pull-handle:hover {
+    transform: scale(1.1);
+}

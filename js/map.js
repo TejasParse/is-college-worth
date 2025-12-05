@@ -315,11 +315,11 @@ document.addEventListener("DOMContentLoaded", function () {
             {
                 id: 2,
                 x: 625, y: 200,
-                text: "Story 2 – Fact point",
-                type: "fact",
+                text: "Tejas's Sunburst Visualization",
+                type: "vis",
                 onEnter: () => {
-                    addChatMessage("THis is the fist stop in story 2");
-                    updateFacts("Story 2: Here's a fun fact stop.");
+                    showVizModal();
+                    tejasSunburstViz();
                 }
             },
             {
