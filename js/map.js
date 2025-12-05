@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             event.preventDefault();
             const delta = event.deltaY;
-            const speed = 0.0002;
+            const speed = 0.0003;
 
             scrollProgress += delta * speed;
             scrollProgress = Math.max(0, Math.min(1, scrollProgress));
@@ -341,11 +341,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 type: "vis",
                 onEnter: () => {
                     updateFacts(`
-                    The promise of many institutions in the country is that universities are supposed to be a return on investment. You go for four years and take on 
-                    tens to hundreds of thousands of dollars of debt so you can make all of it back with the career you got from the degree you earned. However, is that even
-                    true? Is the promise of making all your money back in this day in age even possible? According to the U.S Department of Education\'s College Scorecard from
-                    the most recent institution level data nearly 90% of students don\'t make a return on their investment after 10 years! 
-                `);
+                        The promise of many institutions in the country is that universities are supposed to be a return on investment. You go for four years and take on 
+                        tens to hundreds of thousands of dollars of debt so you can make all of it back with the career you got from the degree you earned. However, is that even
+                        true? Is the promise of making all your money back in this day in age even possible? According to the U.S Department of Education\'s College Scorecard from
+                        the most recent institution level data nearly 90% of students don\'t make a return on their investment after 10 years! 
+                    `);
+                    addChatMessage(`
+                        This visual is a hex bin plot that compares the average annual cost and the average income accumulation 10 years after graduation. It also has a ROI boundar
+                        to show what bins have a positive ROI and which do not. Each hexagon on the plot is a bin that contains a specificed number of datapoints. The darker the hexagon 
+                        the greater number of datapoints inside that bin.      
+                    `);
                     showVizModal();
                     tejasViz();
                 }
@@ -353,7 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
             {
                 id: 6,
                 x: 200, y: 500,
-                text: "Jack's Visualization",
+                text: "ASU Gammage",
                 type: "vis",
                 onEnter: () => {
                     updateFacts(`
@@ -361,11 +366,20 @@ document.addEventListener("DOMContentLoaded", function () {
                         On average five out of ten students complete their degree in at least six years. There is a 50/50 chance that you will waste thousands of dollars 
                         just to not achieve anything at all. 
                     `);
-                    addChatMessage("Keep scrolling to see your peers give college a try")
+                    addChatMessage(`
+                        As you scroll you will see 10 lines routing to the graduation cap icon. Each line represents a student, if the line is green the student graduated in less than 6
+                        years and red if they dropped out. The graduation cap icon represents reaching the goal of graduating or earning the degree. 
+                    `)
                     showVizModal();
                     hexBinVisual();
                     startPaths();
                 }
+            },
+            {
+                id: 7,
+                x: 505, y: 535,
+                text: "Sun Devil Fitness Center",
+                type: "fact",
             },
 
         ]
@@ -556,18 +570,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---------------- Scroll Interaction ----------------
     container.on("wheel", function (event) {
-        if (!endReached){
-            event.preventDefault();
+        event.preventDefault();
 
-            const delta = event.deltaY;
-            const speed = 0.00009;
+        const delta = event.deltaY;
+        const speed = 0.00005;
 
-            progress += delta * speed;
-            progress = Math.max(0, Math.min(1, progress));
+        progress += delta * speed;
+        progress = Math.max(0, Math.min(1, progress));
 
-            updateCharacterPosition();
-        }
-        
+        updateCharacterPosition();
     });
 
     // Close button hides the modal
