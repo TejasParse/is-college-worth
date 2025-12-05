@@ -1,5 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    // ---------------- Chat State & Helpers ----------------
+    const chatMessages = []; // list of { text, role, timestamp }
+
+    const chatMessagesDiv = document.getElementById("chat-messages");
+
+    function renderChatMessages() {
+        if (!chatMessagesDiv) return;
+
+        chatMessagesDiv.innerHTML = "";
+
+        chatMessages.forEach(msg => {
+            const div = document.createElement("div");
+            div.classList.add("chat-message");
+
+            // optional role styling: "system", "user", "marker"
+            if (msg.role) {
+                div.classList.add(msg.role);
+            }
+
+            div.textContent = msg.text;
+            chatMessagesDiv.appendChild(div);
+        });
+
+        // Make sure the latest message is in view
+        chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+    }
+
+    function addChatMessage(text, role = "marker") {
+        chatMessages.push({
+            text,
+            role,
+            timestamp: Date.now()
+        });
+        renderChatMessages();
+    }
+
+
     const vizModal = document.getElementById("viz-modal");
     const vizContainer = document.getElementById("viz-container");
     const vizCloseBtn = document.getElementById("viz-close-btn");
@@ -130,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         ],
-    
+
         // Story 2 markers
         story2: [
             {
@@ -138,14 +175,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 x: 150, y: 120,
                 text: "Story 2 – Start",
                 type: "vis",
-                onEnter: () => updateFacts("Story 2: Welcome to the alternate route!")
+                onEnter: () => {
+                    addChatMessage("This is another stop in the story");
+                    updateFacts("Story 2: Welcome to the alternate route!");
+                }
             },
             {
                 id: 2,
                 x: 625, y: 200,
                 text: "Story 2 – Fact point",
                 type: "fact",
-                onEnter: () => updateFacts("Story 2: Here's a fun fact stop.")
+                onEnter: () => {
+                    addChatMessage("THis is the fist stop in story 2");
+                    updateFacts("Story 2: Here's a fun fact stop.");
+                }
             },
             {
                 id: 4,
@@ -153,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: "Akhil's Bubble Visualization",
                 type: "vis",
                 onEnter: () => {
+                    addChatMessage("THis is just a chat feature for narration");
                     updateFacts("Story 2: Schools by loans originated")
                     showVizModal();
                     akhilBubble(akhilData);
@@ -187,10 +231,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     hexBinVisual();
                 }
             },
-            
+
         ]
     };
-    
+
 
     // ---------------- Markers ----------------
     // const markers = [

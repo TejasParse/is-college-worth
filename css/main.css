@@ -144,3 +144,73 @@ body {
     transform: scale(1.05);
 }
 
+/* Right-hand column next to the map */
+#right-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;              /* take remaining width */
+    height: 700px;        /* match map height */
+    margin-left: 20px;
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+/* Facts box at top of right panel */
+#facts-container {
+    background: #ffffff;
+    color: #000;
+    padding: 10px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    max-height: 120px;
+    overflow-y: auto;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Chat panel */
+#chat-container {
+    flex: 1;                      /* fill remaining height in the right panel */
+    background: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Scrollable list of messages */
+#chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Individual message bubble */
+.chat-message {
+    padding: 8px 10px;
+    border-radius: 12px;
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+/* Some simple variants – you can use these roles if you want */
+.chat-message.system {
+    background: #e0e0e0;
+    align-self: flex-start;
+}
+
+.chat-message.user {
+    background: #ffc627;
+    align-self: flex-end;
+}
+
+.chat-message.marker {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    align-self: flex-start;
+}
