@@ -171,7 +171,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         ]
     };
-    
+
+    {
+    id: 7,
+    x: 260, y: 320,       
+    text: "Srujana's Education Viz",
+    type: "vis",
+    onEnter: () => {
+        showVizModal();   
+        srujanaInitViz();  
+    }
+}
+
 
     // ---------------- Markers ----------------
     // const markers = [
