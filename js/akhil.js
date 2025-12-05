@@ -162,6 +162,17 @@ loanTypes.forEach((type, i) => {
     .style("font-size", "12px")
     .style("font-family", "system-ui, sans-serif")
     .text(type);
+  
+  //title
+  legend.append("text")
+    .attr("x", -650)
+    .attr("y", 0)
+    .attr("fill", "#333")
+    .style("font-size", "14px")
+    .style("font-family", "system-ui, sans-serif")
+    .style("font-weight", "bold")
+    .text("Tops 20 Schools by Loans Originated");
+
 });
 }
 

@@ -192,11 +192,11 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 id: 4,
-                x: 600, y: 500,
+                x: 550, y: 500,
                 text: "Akhil's Bubble Visualization",
                 type: "vis",
                 onEnter: () => {
-                    addChatMessage("THis is just a chat feature for narration");
+                    addChatMessage("Here at this stop, you are shown how students across different schools use federal loans. Each bubble is a school. Bigger bubbles mean more borrowing, and the colors show different loan types. It gives you a quick snapshot of where financial aid is most used and how students needs vary by program. Every bubble represents real students working towards their goals.");
                     updateFacts("Story 2: Schools by loans originated")
                     showVizModal();
                     akhilBubble(akhilData);
