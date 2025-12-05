@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         ],
     
-        // Story 2 markers (example)
+        // Story 2 markers
         story2: [
             {
                 id: 1,
@@ -128,74 +128,71 @@ document.addEventListener("DOMContentLoaded", function () {
                     viz1();
                 }
             },
-
-        {
-            id: 4,
-            x: 600, y: 500,
-            text: "Akhil's Bubble Visualization",
-            type: "vis",
-            onEnter: () => {
-                updateFacts("Story 2: Schools by loans originated")
-                showVizModal();
-                akhilBubble(akhilData);
-            }
-        },
-        {
-            id: 5,
-            x: 150, y: 400,
-            text: "Tejas's Visualization",
-            type: "vis",
-            onEnter: () => {
-                updateFacts(`
+            {
+                id: 4,
+                x: 600, y: 500,
+                text: "Akhil's Bubble Visualization",
+                type: "vis",
+                onEnter: () => {
+                    updateFacts("Story 2: Schools by loans originated")
+                    showVizModal();
+                    akhilBubble(akhilData);
+                }
+            },
+            {
+                id: 5,
+                x: 150, y: 400,
+                text: "Tejas's Visualization",
+                type: "vis",
+                onEnter: () => {
+                    updateFacts(`
                     The promise of many institutions in the country is that universities are supposed to be a return on investment. You go for four years and take on 
                     tens to hundreds of thousands of dollars in debt so you can make all of it back with the career you got from the degree you earned. However, is that even
                     true? Is the promise of making all your money back in this day in age even possible? According to the U.S Department of Education\'s College Scorecard from
                     the most recent institution level data nearly 90% don\'t make a return on their investment after 10 years! 
                 `);
-                showVizModal();
-                tejasViz();
-            }
-        },
-        {
-            id: 6,
-            x: 200, y: 500,
-            text: "Jack's Visualization",
-            type: "vis",
-            onEnter: () => {
-                updateFacts(`
+                    showVizModal();
+                    tejasViz();
+                }
+            },
+            {
+                id: 6,
+                x: 200, y: 500,
+                text: "Jack's Visualization",
+                type: "vis",
+                onEnter: () => {
+                    updateFacts(`
                         
                 `);
-                showVizModal();
-                hexBinVisual();
+                    showVizModal();
+                    hexBinVisual();
+                }
+            },
+            // Srujana Viz 1
+            {
+                id: 7,
+                x: 260, y: 320,
+                text: "Srujana Viz 1",
+                type: "vis",
+                onEnter: () => {
+                    showVizModal();
+                    srujanaInitViz();   // earnings + unemployment chart
+                }
+            },
+            // Srujana Viz 2
+            {
+                id: 8,
+                x: 320, y: 360,
+                text: "Srujana Viz 2",
+                type: "vis",
+                onEnter: () => {
+                    showVizModal();
+                    srujanaViz2();      // Sankey chart
+                }
             }
-        }
         ]
     };
-
-  // after Jack's marker (id 6)
-{
-    id: 7,
-    x: 260, y: 320,
-    text: "Srujana Viz 1",
-    type: "vis",
-    onEnter: () => {
-        showVizModal();
-        srujanaInitViz();   // earnings + unemployment chart
-    }
-},
-{
-    id: 8,
-    x: 320, y: 360,
-    text: "Srujana Viz 2",
-    type: "vis",
-    onEnter: () => {
-        showVizModal();
-        srujanaViz2();      // Sankey chart
-    }
-}
-
-
-
+    
 
     // ---------------- Markers ----------------
     // const markers = [
