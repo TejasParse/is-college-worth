@@ -92,23 +92,34 @@ document.addEventListener("DOMContentLoaded", function () {
                 type: "vis",
                 onEnter: () => updateFacts("You reached the Bus Stop! Here's a fun fact.")
             },
-            {
-                id: 2,
-                x: 420, y: 260,
-                text: "Stop 1",
-                type: "vis",
-                onEnter: () => {
-                    updateFacts("Welcome to Stop 1 – great place to start your journey!");
-                    // showVizModal();
-                }
-            },
-            {
-                id: 3,
-                x: 700, y: 180,
-                text: "Stop 2",
-                type: "vis",
-                onEnter: () => updateFacts("This is Stop 2 – did you know this place is historic?")
-            },
+
+            // Bhavana Viz 1
+    {
+        id: 2,
+        x: 420, y: 260,
+        text: "Bhavana Visualization 1",
+        type: "vis",
+        onEnter: () => {
+            updateFacts("Growth in pay from early career to mid career across majors.");
+            addChatMessage("Explore how salaries grow between early and mid career across different majors.");
+            showVizModal();
+            bhavanaViz1();
+        }
+    },
+    // Bhavana Viz 2
+    {
+        id: 3,
+        x: 700, y: 180,
+        text: "Bhavana Visualization 2",
+        type: "vis",
+        onEnter: () => {
+            updateFacts("Simulate career paths, tuition costs, and alternative salary options.");
+            addChatMessage("Use the simulator to experiment with majors and find break even points.");
+            showVizModal();
+            bhavanaViz2();
+        }
+    },
+            
             {
                 id: 4,
                 x: 860, y: 410,
@@ -166,6 +177,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     srujanaViz2();      // Sankey chart
                 }
             }
+
+            
         ],
 
         // Story 2 markers

@@ -14,3 +14,50 @@
 #bhavana-section .bhavana_input { border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 10px; font: 13px system-ui, sans-serif; }
 #bhavana-section .bhavana_label { font: 12px system-ui, sans-serif; opacity: .8; }
 #bhavana-section .bhavana_stat { font: 13px system-ui, sans-serif; background: #f8fafc; border: 1px dashed #d1d5db; padding: 6px 10px; border-radius: 6px; }
+
+#bhavana-section .bhavana_title {
+  font: 600 20px system-ui, sans-serif;
+  margin: 4px 0 4px;
+  color: #0f172a;
+}
+
+#bhavana-section .bhavana_subtitle {
+  font: 13px system-ui, sans-serif;
+  margin: 0 0 8px;
+  color: #6b7280;
+}
+
+#bhavana-section .bhavana_chart {
+  position: relative;
+  max-width: 1100px;
+  margin: 10px auto 0;
+}
+
+#bhavana-section .bhavana_svg {
+  width: 100%;
+  max-width: 1100px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+  background: white;
+}
+
+#bhavana-section .bhavana_axis_label {
+  font: 12px system-ui, sans-serif;
+  fill: #6b7280;
+}
+
+#bhavana-section .bhavana_value_label {
+  font: 11px system-ui, sans-serif;
+  fill: #0f172a;
+}
+
+#bhavana-section .bhavana_major_label {
+  font: 12px system-ui, sans-serif;
+  fill: #111827;
+}
+
+#bhavana-section .bhavana_grid line {
+  shape-rendering: crispEdges;
+}
