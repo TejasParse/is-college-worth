@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             event.preventDefault();
             const delta = event.deltaY;
-            const speed = 0.0002;
+            const speed = 0.0003;
 
             scrollProgress += delta * speed;
             scrollProgress = Math.max(0, Math.min(1, scrollProgress));
@@ -278,28 +278,45 @@ document.addEventListener("DOMContentLoaded", function () {
                     viz1();
                 }
             },
-            // Srujana Viz 1
-            {
-                id: 8,
-                x: 260, y: 320,
-                text: "Srujana Viz 1",
-                type: "vis",
-                onEnter: () => {
-                    showVizModal();
-                    srujanaInitViz();   // earnings + unemployment chart
-                }
-            },
-            // Srujana Viz 2
-            {
-                id: 9,
-                x: 100, y: 360,
-                text: "Srujana Viz 2",
-                type: "vis",
-                onEnter: () => {
-                    showVizModal();
-                    srujanaViz2();      // Sankey chart
-                }
-            }
+            
+            // Srujana Viz 1 
+{
+    id: 8,
+    x: 260, y: 320,
+    text: "Student Financial Services",   
+    type: "vis",
+    onEnter: () => {
+        updateFacts(`
+A college degree is more than just time in class—it's one of the strongest predictors
+of stable income and job security. As education levels rise, weekly earnings climb
+and unemployment drops. The data here shows how investing in your education
+consistently leads to better long-term outcomes.
+        `);
+        addChatMessage("Here at Student Financial Services, you can see how finishing a degree strengthens both your earning power and job stability.");
+        showVizModal();
+        srujanaInitViz();   // earnings + unemployment chart
+    }
+},
+
+// Srujana Viz 2 
+{
+    id: 9,
+    x: 100, y: 360,
+    text: "Career Services",   
+    type: "vis",
+    onEnter: () => {
+        updateFacts(`
+Your education doesn’t just affect how much you earn—it shapes which careers
+are even available to you. Many high-growth, high-paying jobs rely heavily on
+workers with bachelor’s and advanced degrees. This view shows how different
+education levels flow into real occupations.
+        `);
+        addChatMessage("At Career Services, you can trace how your degree connects to real jobs and see how college opens doors that might not exist otherwise.");
+        showVizModal();
+        srujanaViz2();      // Sankey chart
+    }
+}
+
 
             
         ],
@@ -345,11 +362,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 type: "vis",
                 onEnter: () => {
                     updateFacts(`
-                    The promise of many institutions in the country is that universities are supposed to be a return on investment. You go for four years and take on 
-                    tens to hundreds of thousands of dollars of debt so you can make all of it back with the career you got from the degree you earned. However, is that even
-                    true? Is the promise of making all your money back in this day in age even possible? According to the U.S Department of Education\'s College Scorecard from
-                    the most recent institution level data nearly 90% of students don\'t make a return on their investment after 10 years! 
-                `);
+                        The promise of many institutions in the country is that universities are supposed to be a return on investment. You go for four years and take on 
+                        tens to hundreds of thousands of dollars of debt so you can make all of it back with the career you got from the degree you earned. However, is that even
+                        true? Is the promise of making all your money back in this day in age even possible? According to the U.S Department of Education\'s College Scorecard from
+                        the most recent institution level data nearly 90% of students don\'t make a return on their investment after 10 years! 
+                    `);
+                    addChatMessage(`
+                        This visual is a hex bin plot that compares the average annual cost and the average income accumulation 10 years after graduation. It also has a ROI boundar
+                        to show what bins have a positive ROI and which do not. Each hexagon on the plot is a bin that contains a specificed number of datapoints. The darker the hexagon 
+                        the greater number of datapoints inside that bin.      
+                    `);
                     showVizModal();
                     tejasViz();
                 }
@@ -357,7 +379,7 @@ document.addEventListener("DOMContentLoaded", function () {
             {
                 id: 6,
                 x: 200, y: 500,
-                text: "Jack's Visualization",
+                text: "ASU Gammage",
                 type: "vis",
                 onEnter: () => {
                     updateFacts(`
@@ -365,11 +387,20 @@ document.addEventListener("DOMContentLoaded", function () {
                         On average five out of ten students complete their degree in at least six years. There is a 50/50 chance that you will waste thousands of dollars 
                         just to not achieve anything at all. 
                     `);
-                    addChatMessage("Keep scrolling to see your peers give college a try")
+                    addChatMessage(`
+                        As you scroll you will see 10 lines routing to the graduation cap icon. Each line represents a student, if the line is green the student graduated in less than 6
+                        years and red if they dropped out. The graduation cap icon represents reaching the goal of graduating or earning the degree. 
+                    `)
                     showVizModal();
                     hexBinVisual();
                     startPaths();
                 }
+            },
+            {
+                id: 7,
+                x: 505, y: 535,
+                text: "Sun Devil Fitness Center",
+                type: "fact",
             },
 
         ]
@@ -560,18 +591,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---------------- Scroll Interaction ----------------
     container.on("wheel", function (event) {
-        if (!endReached){
-            event.preventDefault();
+        event.preventDefault();
 
-            const delta = event.deltaY;
-            const speed = 0.00009;
+        const delta = event.deltaY;
+        const speed = 0.00005;
 
-            progress += delta * speed;
-            progress = Math.max(0, Math.min(1, progress));
+        progress += delta * speed;
+        progress = Math.max(0, Math.min(1, progress));
 
-            updateCharacterPosition();
-        }
-        
+        updateCharacterPosition();
     });
 
     // Close button hides the modal
