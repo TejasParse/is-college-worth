@@ -335,17 +335,7 @@ education levels flow into real occupations.
             },
             {
                 id: 2,
-                x: 300, y: 420,
-                text: "Career Services",
-                type: "vis",
-                onEnter: () => {
-                    showVizModal();
-                    tejasSunburstViz();
-                }
-            },
-            {
-                id: 3,
-                x: 60, y: 190,
+                x: 60, y: 180,
                 text: "Chase Bank",
                 type: "vis",
                 onEnter: () => {
@@ -356,7 +346,7 @@ education levels flow into real occupations.
                 }
             },
             {
-                id: 4,
+                id: 3,
                 x: 300, y: 500,
                 text: "Financial Aid Office",
                 type: "vis",
@@ -368,15 +358,17 @@ education levels flow into real occupations.
                 }
             },
             {
-                id: 5,
-                x: 400, y: 400,
-                text: "Financial Aid Office",
-                type: "invisible",
+                id: 4,
+                x: 300, y: 420,
+                text: "Career Services",
+                type: "vis",
                 onEnter: () => {
+                    showVizModal();
+                    tejasSunburstViz();
                 }
             },
             {
-                id: 6,
+                id: 5,
                 x: 300, y: 120,
                 text: "Church",
                 type: "vis",
@@ -397,7 +389,7 @@ education levels flow into real occupations.
                 }
             },
             {
-                id: 7,
+                id: 6,
                 x: 500, y: 480,
                 text: "WP Carey School of Business",
                 type: "vis",
@@ -417,7 +409,7 @@ education levels flow into real occupations.
                 }
             },
             {
-                id: 8,
+                id: 7,
                 x: 505, y: 535,
                 text: "Sun Devil Fitness Center",
                 type: "fact",
