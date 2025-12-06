@@ -335,7 +335,7 @@ education levels flow into real occupations.
             },
             {
                 id: 2,
-                x: 625, y: 200,
+                x: 620, y: 200,
                 text: "Tejas's Sunburst Visualization",
                 type: "vis",
                 onEnter: () => {
@@ -345,26 +345,26 @@ education levels flow into real occupations.
             },
             {
                 id: 3,
-                x: 570, y: 300,
-                text: "Akhil's Bubble Visualization",
-                type: "vis",
-                onEnter: () => {
-                    addChatMessage("Here at this stop, you are shown how students across different schools use federal loans. Each bubble is a school. Bigger bubbles mean more borrowing, and the colors show different loan types. It gives you a quick snapshot of where financial aid is most used and how students needs vary by program. Every bubble represents real students working towards their goals.");
-                    updateFacts("We're taught that college is an investment: borrow now, succeed later. But students taking on thousands in loans just to earn a degree, the promise starts to feel less certain. Some programs require far more borrowing than others, reminding us that the cost of opportunity isn’t shared equally. This forces us to ask a hard question: if so many students must take on this much debt, what future are we really preparing them for?")
-                    showVizModal();
-                    akhilBubble(akhilData);
-                }
-            },
-            {
-                id: 4,
-                x: 800, y: 500,
-                text: "Akhil's Map Visualization",
+                x: 60, y: 190,
+                text: "Chase Bank",
                 type: "vis",
                 onEnter: () => {
                     addChatMessage("This map shows the locations of colleges and universities across the U.S. The color of the region reflects the average tuition fees, with darker colors indicating higher costs. This visualization helps us understand the geographical distribution of educational institutions and highlights that some regions leave students in deeper in debts, showing structural inequality.");
                     updateFacts("Access to higher education is not uniform across the country. This map reveals significant disparities in the availability and cost of colleges and universities. Regions with fewer institutions or higher tuition fees may pose barriers for students seeking affordable education. By visualizing these patterns, we can better understand the challenges faced by prospective students and work towards creating a more equitable educational landscape.");
                     showVizModal();
                     akhilMap(akhilData);
+                }
+            },
+            {
+                id: 4,
+                x: 300, y: 450,
+                text: "Financial Aid Office",
+                type: "vis",
+                onEnter: () => {
+                    addChatMessage("Here at this stop, you are shown how students across different schools use federal loans. Each bubble is a school. Bigger bubbles mean more borrowing, and the colors show different loan types. It gives you a quick snapshot of where financial aid is most used and how students needs vary by program. Every bubble represents real students working towards their goals.");
+                    updateFacts("We're taught that college is an investment: borrow now, succeed later. But students taking on thousands in loans just to earn a degree, the promise starts to feel less certain. Some programs require far more borrowing than others, reminding us that the cost of opportunity isn’t shared equally. This forces us to ask a hard question: if so many students must take on this much debt, what future are we really preparing them for?")
+                    showVizModal();
+                    akhilBubble(akhilData);
                 }
             },
             {
