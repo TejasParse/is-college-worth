@@ -356,9 +356,28 @@ education levels flow into real occupations.
                     showVizModal();
                     akhilBubble(akhilData);
                 }
-            },
+            },            
             {
                 id: 4,
+                x: 500, y: 480,
+                text: "WP Carey School of Business",
+                type: "vis",
+                onEnter: () => {
+                    updateFacts(`
+                        Not only is getting your degree almost a guarantee not to be a return on investment but there\'s also the possibility that you don\'t complete it. 
+                        On average five out of ten students complete their degree in at least six years. There is a 50/50 chance that you will waste thousands of dollars 
+                        just to not achieve anything at all. 
+                    `);
+                    addChatMessage(`
+                        As you scroll you will see 10 lines routing to the graduation cap icon. Each line represents a student, if the line is green the student graduated in less than 6
+                        years and red if they dropped out. The graduation cap icon represents reaching the goal of graduating or earning the degree. 
+                    `)
+                    showVizModal();
+                    hexBinVisual();
+                }
+            },
+            {
+                id: 5,
                 x: 300, y: 420,
                 text: "Career Services",
                 type: "vis",
@@ -368,7 +387,7 @@ education levels flow into real occupations.
                 }
             },
             {
-                id: 5,
+                id: 6,
                 x: 300, y: 120,
                 text: "Church",
                 type: "vis",
@@ -389,30 +408,13 @@ education levels flow into real occupations.
                 }
             },
             {
-                id: 6,
-                x: 500, y: 480,
-                text: "WP Carey School of Business",
-                type: "vis",
-                onEnter: () => {
-                    updateFacts(`
-                        Not only is getting your degree almost a guarantee not to be a return on investment but there\'s also the possibility that you don\'t complete it. 
-                        On average five out of ten students complete their degree in at least six years. There is a 50/50 chance that you will waste thousands of dollars 
-                        just to not achieve anything at all. 
-                    `);
-                    addChatMessage(`
-                        As you scroll you will see 10 lines routing to the graduation cap icon. Each line represents a student, if the line is green the student graduated in less than 6
-                        years and red if they dropped out. The graduation cap icon represents reaching the goal of graduating or earning the degree. 
-                    `)
-                    showVizModal();
-                    hexBinVisual();
-                    startPaths();
-                }
-            },
-            {
                 id: 7,
                 x: 505, y: 535,
                 text: "Sun Devil Fitness Center",
-                type: "fact",
+                type: "vis",
+                onEnter: () => {
+                    startPaths();
+                }
             },
 
         ]
