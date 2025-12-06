@@ -274,28 +274,45 @@ document.addEventListener("DOMContentLoaded", function () {
                     viz1();
                 }
             },
-            // Srujana Viz 1
-            {
-                id: 8,
-                x: 260, y: 320,
-                text: "Srujana Viz 1",
-                type: "vis",
-                onEnter: () => {
-                    showVizModal();
-                    srujanaInitViz();   // earnings + unemployment chart
-                }
-            },
-            // Srujana Viz 2
-            {
-                id: 9,
-                x: 100, y: 360,
-                text: "Srujana Viz 2",
-                type: "vis",
-                onEnter: () => {
-                    showVizModal();
-                    srujanaViz2();      // Sankey chart
-                }
-            }
+            
+            // Srujana Viz 1 
+{
+    id: 8,
+    x: 260, y: 320,
+    text: "Student Financial Services",   
+    type: "vis",
+    onEnter: () => {
+        updateFacts(`
+A college degree is more than just time in class—it's one of the strongest predictors
+of stable income and job security. As education levels rise, weekly earnings climb
+and unemployment drops. The data here shows how investing in your education
+consistently leads to better long-term outcomes.
+        `);
+        addChatMessage("Here at Student Financial Services, you can see how finishing a degree strengthens both your earning power and job stability.");
+        showVizModal();
+        srujanaInitViz();   // earnings + unemployment chart
+    }
+},
+
+// Srujana Viz 2 
+{
+    id: 9,
+    x: 100, y: 360,
+    text: "Career Services",   
+    type: "vis",
+    onEnter: () => {
+        updateFacts(`
+Your education doesn’t just affect how much you earn—it shapes which careers
+are even available to you. Many high-growth, high-paying jobs rely heavily on
+workers with bachelor’s and advanced degrees. This view shows how different
+education levels flow into real occupations.
+        `);
+        addChatMessage("At Career Services, you can trace how your degree connects to real jobs and see how college opens doors that might not exist otherwise.");
+        showVizModal();
+        srujanaViz2();      // Sankey chart
+    }
+}
+
 
             
         ],
