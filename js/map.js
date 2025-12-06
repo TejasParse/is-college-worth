@@ -241,19 +241,6 @@ document.addEventListener("DOMContentLoaded", function () {
         bhavanaViz2();
     }
 },
-{
-                id: 4,
-                x: 860, y: 410,
-                text: "Stop 3",
-                type: "vis",
-                onEnter: () => updateFacts("Stop 3: You are doing great on this tour!")
-            },
-            {
-                id: 5,
-                x: 550, y: 500,
-                text: "Invisible turn helper",
-                type: "invisible"
-            },
                    
             {
                 id: 6,
