@@ -335,8 +335,8 @@ education levels flow into real occupations.
             },
             {
                 id: 2,
-                x: 620, y: 200,
-                text: "Tejas's Sunburst Visualization",
+                x: 300, y: 420,
+                text: "Career Services",
                 type: "vis",
                 onEnter: () => {
                     showVizModal();
@@ -369,8 +369,16 @@ education levels flow into real occupations.
             },
             {
                 id: 5,
-                x: 150, y: 400,
-                text: "Tejas's Visualization",
+                x: 400, y: 400,
+                text: "Financial Aid Office",
+                type: "invisible",
+                onEnter: () => {
+                }
+            },
+            {
+                id: 6,
+                x: 300, y: 120,
+                text: "Church",
                 type: "vis",
                 onEnter: () => {
                     updateFacts(`
@@ -389,7 +397,7 @@ education levels flow into real occupations.
                 }
             },
             {
-                id: 6,
+                id: 7,
                 x: 500, y: 480,
                 text: "WP Carey School of Business",
                 type: "vis",
@@ -409,7 +417,7 @@ education levels flow into real occupations.
                 }
             },
             {
-                id: 7,
+                id: 8,
                 x: 505, y: 535,
                 text: "Sun Devil Fitness Center",
                 type: "fact",

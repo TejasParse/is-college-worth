@@ -309,7 +309,7 @@ function tejasArcLabelTransform(d) {
 function tejasDisplayName(d) {
     const name = d.data.name;
 
-    if (name === "College or more") return ">";
+    if (name === "College or more") return ">=";
     if (name === "Less than college") return "<";
     if (name === "Has certification") return "Y";
     if (name === "No / not reported") return "N";
@@ -337,7 +337,7 @@ function tejasSunburstViz() {
 
         const sunburstRadius = Math.min(width, height - 220) / 2;
         const sunburstCenterX = width / 2;
-        const sunburstCenterY = height * 0.62;
+        const sunburstCenterY = height * 0.62-50;
 
         const { hierarchy: dataRoot, ageBins } = tejasBuildHierarchyForSunburst(rawData);
         const root = d3.hierarchy(dataRoot).sum(d => d.value || 0);
@@ -404,7 +404,7 @@ function tejasSunburstViz() {
             .attr("transform", `translate(${width - 220}, 40)`);
 
         const legendItems = [
-            { symbol: ">", text: "College or more" },
+            { symbol: ">=", text: "College or more" },
             { symbol: "<", text: "Less than college" },
             { symbol: "Y", text: "Has certification" },
             { symbol: "N", text: "No / not reported" }
