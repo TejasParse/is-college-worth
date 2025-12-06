@@ -357,7 +357,7 @@ education levels flow into real occupations.
             },
             {
                 id: 4,
-                x: 300, y: 450,
+                x: 300, y: 500,
                 text: "Financial Aid Office",
                 type: "vis",
                 onEnter: () => {
@@ -390,8 +390,8 @@ education levels flow into real occupations.
             },
             {
                 id: 6,
-                x: 200, y: 500,
-                text: "ASU Gammage",
+                x: 500, y: 480,
+                text: "WP Carey School of Business",
                 type: "vis",
                 onEnter: () => {
                     updateFacts(`
