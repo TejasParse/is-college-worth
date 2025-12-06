@@ -325,16 +325,24 @@ education levels flow into real occupations.
         story2: [
             {
                 id: 1,
-                x: 150, y: 120,
-                text: "Story 2 – Start",
+                x: 70, y: 70,
+                text: "Bus Stop",
                 type: "vis",
                 onEnter: () => {
-                    addChatMessage("This is another stop in the story");
-                    updateFacts("Story 2: Welcome to the alternate route!");
+                    addChatMessage("The ASU bus stop is where thousands of students begin and end their daily campus journeys. From here, we start exploring the financial pathways students take, beginning with understanding the environment surrounding higher education.");
                 }
             },
             {
                 id: 2,
+                x: 70, y: 150,
+                text: "Bus Stop",
+                type: "fact",
+                onEnter: () => {
+                    addChatMessage("Chase Bank sits just across from campus and represents the financial institutions students often rely on for loans or credit. Our next visualization explores the geographic spread of colleges and how tuition costs vary across the country.");
+                }
+            },
+            {
+                id: 3,
                 x: 60, y: 180,
                 text: "Chase Bank",
                 type: "vis",
@@ -346,7 +354,16 @@ education levels flow into real occupations.
                 }
             },
             {
-                id: 3,
+                id: 4,
+                x: 200, y: 400,
+                text: "Financial Aid Office",
+                type: "fact",
+                onEnter: () => {
+                    addChatMessage("The Financial Aid Office is where students learn how much support they are eligible for and what loans they may need to take. The upcoming visualization shows how different schools across the nation rely on federal loans, highlighting the uneven financial burden students face.")
+                }
+            },
+            {
+                id: 4,
                 x: 300, y: 500,
                 text: "Financial Aid Office",
                 type: "vis",
@@ -356,63 +373,112 @@ education levels flow into real occupations.
                     showVizModal();
                     akhilBubble(akhilData);
                 }
-            },            
+            },  
             {
-                id: 4,
+                id: 5,
+                x: 400, y: 540,
+                text: "Chase Bank",
+                type: "fact",
+                onEnter: () => {
+                    addChatMessage("W. P. Carey is ASU’s business school and a place where students learn about investment, risk, and financial returns. In this visualization, each hexagon shows schools grouped by their average annual cost and the income students earn ten years after graduation. The boundary line helps you see which areas have a positive return on investment and which do not, raising the question of whether the price of a degree truly pays off.");
+                }
+            },          
+            {
+                id: 6,
                 x: 500, y: 480,
                 text: "WP Carey School of Business",
                 type: "vis",
                 onEnter: () => {
                     updateFacts(`
-                        Not only is getting your degree almost a guarantee not to be a return on investment but there\'s also the possibility that you don\'t complete it. 
-                        On average five out of ten students complete their degree in at least six years. There is a 50/50 chance that you will waste thousands of dollars 
-                        just to not achieve anything at all. 
+                        This visual is a hex bin plot that compares the average annual cost and the average income accumulation 10 years after graduation. It also has a ROI boundar
+                        to show what bins have a positive ROI and which do not. Each hexagon on the plot is a bin that contains a specificed number of datapoints. The darker the hexagon 
+                        the greater number of datapoints inside that bin. 
                     `);
-                    addChatMessage(`
-                        As you scroll you will see 10 lines routing to the graduation cap icon. Each line represents a student, if the line is green the student graduated in less than 6
-                        years and red if they dropped out. The graduation cap icon represents reaching the goal of graduating or earning the degree. 
-                    `)
                     showVizModal();
                     hexBinVisual();
                 }
             },
             {
-                id: 5,
+                id: 7,
+                x: 350, y: 450,
+                text: "Chase Bank",
+                type: "fact",
+                onEnter: () => {
+                    addChatMessage(`
+                        Career Services is where students come to build skills and explore certifications that often matter just as much as a college degree. Many students invest years into earning a degree only to find that they still need additional certifications to stay competitive in the job market. What is even more surprising is that, in many age groups, the income of people with a college degree is very similar to those without one who simply hold relevant certifications. If both paths lead to nearly the same earnings, it raises an important question: why spend so much time and money on a degree at all?
+
+                        `)
+                }
+            },         
+            {
+                id: 8,
                 x: 300, y: 420,
                 text: "Career Services",
                 type: "vis",
                 onEnter: () => {
+                    updateFacts(`
+                        This visualization highlights how different age groups, education levels, and certification choices shape opportunities in the job market and how skills beyond a degree can influence long term outcomes.
+                    `);
                     showVizModal();
                     tejasSunburstViz();
                 }
             },
             {
-                id: 6,
+                id: 9,
+                x: 300, y: 300,
+                text: "Chase Bank",
+                type: "fact",
+                onEnter: () => {
+                    addChatMessage(`
+                        The next visualization shows retirement income across age bins, comparing people 
+with a college degree to those without one. You’ll notice that at the median, the 
+difference between the two groups isn’t as large as most people expect. Let’s take a closer look at what 
+this means for the long-term value of a college education.
+`)
+                }
+            },        
+            {
+                id: 10,
                 x: 300, y: 120,
                 text: "Church",
                 type: "vis",
                 onEnter: () => {
                     updateFacts(`
-                        The promise of many institutions in the country is that universities are supposed to be a return on investment. You go for four years and take on 
-                        tens to hundreds of thousands of dollars of debt so you can make all of it back with the career you got from the degree you earned. However, is that even
-                        true? Is the promise of making all your money back in this day in age even possible? According to the U.S Department of Education\'s College Scorecard from
-                        the most recent institution level data nearly 90% of students don\'t make a return on their investment after 10 years! 
-                    `);
-                    addChatMessage(`
-                        This visual is a hex bin plot that compares the average annual cost and the average income accumulation 10 years after graduation. It also has a ROI boundar
-                        to show what bins have a positive ROI and which do not. Each hexagon on the plot is a bin that contains a specificed number of datapoints. The darker the hexagon 
-                        the greater number of datapoints inside that bin.      
-                    `);
+                        This quiet corner of campus gives us space to reflect on long-term outcomes. 
+Here, we examine how retirement income changes across age groups for those 
+with and without a college degree. While it's commonly believed that earning 
+a degree guarantees higher lifetime earnings, the data shows a more complex 
+story—especially when comparing different percentiles of income.
+                        `)
+                    
                     showVizModal();
                     tejasViz();
                 }
             },
             {
-                id: 7,
-                x: 505, y: 535,
-                text: "Sun Devil Fitness Center",
+                id: 11,
+                x: 390, y: 150,
+                text: "Old Main",
+                type: "fact",
+                onEnter: () => {
+                    addChatMessage(`
+                    We are now approaching Old Main, one of the most iconic spots on campus and a place where students often come to take their graduation photos. It represents the finish line of the college journey and the moment every student hopes to reach. Before we look at the final visualization, take a moment to reflect on how many students actually make it to this stage and how many never get the chance. Our last visual will help us understand that journey.
+                        `)
+                }
+            },    
+            {
+                id: 12,
+                x: 443, y: 195,
+                text: "Old Main",
                 type: "vis",
                 onEnter: () => {
+                    updateFacts(`
+                        This visualization traces the journeys of individual students as they move through college. Each line represents a student, with green lines showing those who graduate within six years and red lines showing those who drop out. The animation helps reveal how many students reach the goal of earning a degree and how many fall off the path along the way.
+                    `);
+                    addChatMessage(`
+                        As you scroll you will see 10 lines routing to the graduation cap icon. Each line represents a student, if the line is green the student graduated in less than 6
+                        years and red if they dropped out. The graduation cap icon represents reaching the goal of graduating or earning the degree. 
+                    `)
                     startPaths();
                 }
             },
