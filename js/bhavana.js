@@ -95,10 +95,6 @@ console.log("Bhavana's D3 Visualization Script");
         raw.columns.find(c => /major/i.test(c)) || raw.columns[0];
     }
 
-    setDebug(
-      `Using: ${CSV_FILE} | delim "${delim}" | Major: ${majorCol} | Start: ${startCol} | Mid: ${midCol}`
-    );
-
     const data = raw
       .map(d => ({
         major: String(d[majorCol]).trim(),
