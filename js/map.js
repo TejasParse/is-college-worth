@@ -346,7 +346,7 @@ education levels flow into real occupations.
                 type: "vis",
                 onEnter: () => {
                     addChatMessage("Here at this stop, you are shown how students across different schools use federal loans. Each bubble is a school. Bigger bubbles mean more borrowing, and the colors show different loan types. It gives you a quick snapshot of where financial aid is most used and how students needs vary by program. Every bubble represents real students working towards their goals.");
-                    updateFacts("Story 2: Schools by loans originated")
+                    updateFacts("We're taught that college is an investment: borrow now, succeed later. But students taking on thousands in loans just to earn a degree, the promise starts to feel less certain. Some programs require far more borrowing than others, reminding us that the cost of opportunity isn’t shared equally. This forces us to ask a hard question: if so many students must take on this much debt, what future are we really preparing them for?")
                     showVizModal();
                     akhilBubble(akhilData);
                 }

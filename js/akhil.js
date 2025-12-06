@@ -23,6 +23,7 @@ d3.csv("data/StudentLoanDebtBySchool.csv").then(function(rows){
   });
 
   akhilData = rows;
+  hookControls(akhilData);
 });
 function akhilBubble() {
   const container = d3.select("#viz-container");

@@ -9,6 +9,19 @@
   padding: 6px 8px; border-radius: 6px; font: 12px system-ui, sans-serif; box-shadow: 0 4px 16px rgba(0,0,0,.08);
   opacity: 0;
 }
+.akhil_tt {
+    position: absolute;
+    pointer-events: none;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font: 12px system-ui, sans-serif;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+    opacity: 0;
+    z-index: 9999;  /* <-- FIX */
+}
+
 
 #akhil-section .akhil_panel { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 10px 0; }
 #akhil-section .akhil_input { border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 10px; font: 13px system-ui, sans-serif; }
