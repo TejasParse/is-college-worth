@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
     type: "vis",
     onEnter: () => {
         updateFacts("Explore how salaries grow between early and mid career across different majors.");
-        addChatMessage("Slopegraph loaded near the LSE Building.");
+        addChatMessage("This chart shows how different majors grow from early to mid-career. Each line represents a field of study, and the steeper the line, the faster salaries rise as graduates gain experience. Some majors see dramatic jumps, while others grow more gradually. It’s a clear reminder that the value of a degree can change significantly over time, depending on the path you choose.");
         showVizModal();
         bhavanaViz1();
     }
