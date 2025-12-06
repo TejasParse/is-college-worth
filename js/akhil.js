@@ -245,7 +245,7 @@ function drawMap(data){
 
     const lw = 20, lh = 180;
     const scale = d3.scaleLinear().domain(fill.domain()).range([lh,0]);
-    const g = svg.append("g").attr("transform","translate("+(w-60)+",40)");
+    const g = svg.append("g").attr("transform","translate("+(w-100)+",500)");
 
     const defs = svg.append("defs");
     const gid = "gradLoan";
@@ -274,13 +274,23 @@ function drawMap(data){
     const axis = d3.axisRight(scale)
       .ticks(6)
       .tickFormat(d=>"$"+Math.round(d).toLocaleString());
-
+      
     g.append("g")
       .attr("transform","translate("+lw+",0)")
       .call(axis)
       .selectAll("text")
       .style("font-size","10px");
-  });
+    
+    //title
+    svg.append("text")
+      .attr("x", w/2 - 100)
+      .attr("y", 30)
+      .attr("fill", "#333")
+      .style("font-size", "14px")
+      .style("font-family", "system-ui, sans-serif")
+      .style("font-weight", "bold")
+      .text("Average Student Loan Amount by State");
+    });
 }
 
 function hookControls(data){
