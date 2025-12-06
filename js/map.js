@@ -248,9 +248,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: "Adam's Visualization 2",
                 type: "vis",
                 onEnter: () => {
-                    updateFacts("Story 2: Main visualization stop.");
+                    updateFacts("In almost every age group, the lower quartile of degree holders make more than the median of non degree holders. Additionally, degree holders have access higher salary ranges than non degree holders.");
                     showVizModal();
-                    viz2();
+                    adamViz2();
                 }
             },
             {
@@ -259,9 +259,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: "Adam's Visualization 1",
                 type: "vis",
                 onEnter: () => {
-                    updateFacts("Story 2: Main visualization stop.");
+                    updateFacts("When controlling for age, we see that degree holders experience better long-term health outcomes than non degree holders.");
                     showVizModal();
-                    viz1();
+                    adamViz1();
                 }
             },
             
