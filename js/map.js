@@ -212,32 +212,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 onEnter: () => updateFacts("You reached the Bus Stop! Here's a fun fact.")
             },
 
-            // Bhavana Viz 1
-    {
-        id: 2,
-        x: 420, y: 260,
-        text: "Bhavana Visualization 1",
-        type: "vis",
-        onEnter: () => {
-            updateFacts("Growth in pay from early career to mid career across majors.");
-            addChatMessage("Explore how salaries grow between early and mid career across different majors.");
-            showVizModal();
-            bhavanaViz1();
-        }
-    },
-    // Bhavana Viz 2
-    {
-        id: 3,
-        x: 700, y: 180,
-        text: "Bhavana Visualization 2",
-        type: "vis",
-        onEnter: () => {
-            updateFacts("Simulate career paths, tuition costs, and alternative salary options.");
-            addChatMessage("Use the simulator to experiment with majors and find break even points.");
-            showVizModal();
-            bhavanaViz2();
-        }
-    },
+            // Bhavana Visualization 1 (Slopegraph)
+{
+    id: 2,
+    x: 460, 
+    y: 299,
+    text: "Life Sciences Building",
+    type: "vis",
+    onEnter: () => {
+        updateFacts("Explore how salaries grow between early and mid career across different majors.");
+        addChatMessage("Slopegraph loaded near the LSE Building.");
+        showVizModal();
+        bhavanaViz1();
+    }
+},
+
+// Bhavana Visualization 2 
+{
+    id: 3,
+    x: 305, 
+    y: 465,
+    text: "Student Services Bldg",
+    type: "vis",
+    onEnter: () => {
+        updateFacts("Simulate career paths, tuition costs, and alternative salary options to see when a major pays off.");
+        addChatMessage("ROI Simulator loaded near the ISSC Building.");
+        showVizModal();
+        bhavanaViz2();
+    }
+},
+           
             
             {
                 id: 4,
